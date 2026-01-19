@@ -1,0 +1,14 @@
+# ninja log v5
+3	33	0	D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/x86_64/CMakeFiles/cmake.verify_globs	13ca12acc54e176
+29	6497	7904979361373020	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/3ac1747489ad933456d0b9d007f9e310/react/renderer/components/safeareacontext/EventEmitters.cpp.o	62a931fa2fb6855c
+6	9406	7904979390154277	CMakeFiles/appmodules.dir/OnLoad.cpp.o	6e2892ed195f25f1
+11	10168	7904979398667512	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/34bb486e49e03709023ff239c5b98857/renderer/components/safeareacontext/RNCSafeAreaViewState.cpp.o	2a901ebf58bf221b
+23	11229	7904979408602223	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/ff8d2b4c3125a5dd6e474454f36a851c/jni/react/renderer/components/safeareacontext/Props.cpp.o	7996642e150ccccb
+17	11824	7904979414298472	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/9122fa8788744db900aa37b64a5b7452/components/safeareacontext/RNCSafeAreaViewShadowNode.cpp.o	854ae08b13c20aa9
+1	13292	7904979429382063	CMakeFiles/appmodules.dir/D_/Ramesh/home-service-booking-app/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	acea73b7a42b310
+10170	14877	7904979445672724	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/ff8d2b4c3125a5dd6e474454f36a851c/jni/react/renderer/components/safeareacontext/States.cpp.o	d4e4b82f352f1a26
+11231	16925	7904979466134485	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/e50e213d821aa3f20a73a1e4c7e91dc9/generated/source/codegen/jni/safeareacontext-generated.cpp.o	a3f0d28f2831af3a
+9407	17540	7904979472395711	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/ff8d2b4c3125a5dd6e474454f36a851c/jni/react/renderer/components/safeareacontext/ShadowNodes.cpp.o	3e63417ac874292e
+6504	17738	7904979473865857	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/1de9d8f6fbb7107f31f42c18122888a5/renderer/components/safeareacontext/ComponentDescriptors.cpp.o	a94e6a01e28bd099
+17738	18026	7904979477196048	D:/Ramesh/home-service-booking-app/android/app/build/intermediates/cxx/Debug/r2r2x6j5/obj/x86_64/libreact_codegen_safeareacontext.so	feff387ed36e7a0f
+18026	18161	7904979478735309	D:/Ramesh/home-service-booking-app/android/app/build/intermediates/cxx/Debug/r2r2x6j5/obj/x86_64/libappmodules.so	c02e0632ca46b366

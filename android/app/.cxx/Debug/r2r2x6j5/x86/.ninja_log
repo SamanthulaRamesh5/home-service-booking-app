@@ -1,0 +1,14 @@
+# ninja log v5
+3	38	0	D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/x86/CMakeFiles/cmake.verify_globs	fead7cd160f6ad6a
+30	5631	7904979140446869	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/ff8d2b4c3125a5dd6e474454f36a851c/jni/react/renderer/components/safeareacontext/EventEmitters.cpp.o	9932b2c826a0e4fc
+1	7803	7904979162733227	CMakeFiles/appmodules.dir/OnLoad.cpp.o	d77d1becfb970e88
+11	8197	7904979166795513	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/34bb486e49e03709023ff239c5b98857/renderer/components/safeareacontext/RNCSafeAreaViewState.cpp.o	39be2e855675553
+24	10913	7904979193238019	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/1de9d8f6fbb7107f31f42c18122888a5/renderer/components/safeareacontext/ComponentDescriptors.cpp.o	7e87b09d636fbd5
+17	11444	7904979199124966	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/9122fa8788744db900aa37b64a5b7452/components/safeareacontext/RNCSafeAreaViewShadowNode.cpp.o	a35d7361e59e6fb
+6	12815	7904979212982064	CMakeFiles/appmodules.dir/D_/Ramesh/home-service-booking-app/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	2e0644f57a107979
+7804	13207	7904979217109210	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/703b5f01a06dd1949ae429bac2926c88/codegen/jni/react/renderer/components/safeareacontext/States.cpp.o	4d4a0426c924cec
+8200	14602	7904979231092867	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/a6ea4f3ca87f3bcff8b4bb907fa5b6cb/build/generated/source/codegen/jni/safeareacontext-generated.cpp.o	7b0a85928ea16440
+5646	14775	7904979232910487	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/703b5f01a06dd1949ae429bac2926c88/codegen/jni/react/renderer/components/safeareacontext/Props.cpp.o	a9689935fe7dcef6
+10914	16450	7904979249708770	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/ff8d2b4c3125a5dd6e474454f36a851c/jni/react/renderer/components/safeareacontext/ShadowNodes.cpp.o	ba70eb4360a44247
+16450	16661	7904979251909852	D:/Ramesh/home-service-booking-app/android/app/build/intermediates/cxx/Debug/r2r2x6j5/obj/x86/libreact_codegen_safeareacontext.so	3bd54efb509ac2d9
+16661	16789	7904979253258429	D:/Ramesh/home-service-booking-app/android/app/build/intermediates/cxx/Debug/r2r2x6j5/obj/x86/libappmodules.so	d6a98dab5d852048
