@@ -1,0 +1,22 @@
+
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AppStackParamList } from './types';
+import { Text, View } from 'react-native';
+import CustomerHomeScreen from '../screens/customer/CustomerHomeScreen';
+import ProviderHomeScreen from '../screens/customer/ProviderHomeScreen';
+
+const Stack=createNativeStackNavigator<AppStackParamList>();
+
+
+const AppNavigator = () => {
+  return (
+   
+   <Stack.Navigator screenOptions={{headerShown:false}}>
+    <Stack.Screen name='CustomerHome' component={CustomerHomeScreen}/>
+        <Stack.Screen name='ProviderHome' component={ProviderHomeScreen}/>
+   </Stack.Navigator>
+  )
+}
+
+export default AppNavigator
