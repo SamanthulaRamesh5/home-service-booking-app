@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "764253865217",
+    "project_id": "home-service-booking-app-84b17",
+    "storage_bucket": "home-service-booking-app-84b17.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764253865217:android:9454e35b21b00bbded0700",
+        "android_client_info": {
+          "package_name": "com.homeservicesbookingapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxRSZDjD6gCSZNcCO13YxSpn8M8c-tFs8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
