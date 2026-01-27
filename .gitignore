@@ -141,3 +141,5 @@ android/.gradle/
 ios/build/
 android/app/build/
 android/build/
+android/.cxx/
+android/app/.cxx/
