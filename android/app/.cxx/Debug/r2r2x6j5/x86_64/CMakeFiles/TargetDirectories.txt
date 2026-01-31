@@ -1,6 +1,0 @@
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/x86_64/CMakeFiles/appmodules.dir
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/x86_64/CMakeFiles/edit_cache.dir
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/x86_64/CMakeFiles/rebuild_cache.dir
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/x86_64/safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/x86_64/safeareacontext_autolinked_build/CMakeFiles/edit_cache.dir
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/x86_64/safeareacontext_autolinked_build/CMakeFiles/rebuild_cache.dir

@@ -1,4 +1,0 @@
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/armeabi-v7a/CMakeFiles/_CMakeLTOTest-CXX/bin/CMakeFiles/foo.dir
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/armeabi-v7a/CMakeFiles/_CMakeLTOTest-CXX/bin/CMakeFiles/boo.dir
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/armeabi-v7a/CMakeFiles/_CMakeLTOTest-CXX/bin/CMakeFiles/edit_cache.dir
-D:/Ramesh/home-service-booking-app/android/app/.cxx/Debug/r2r2x6j5/armeabi-v7a/CMakeFiles/_CMakeLTOTest-CXX/bin/CMakeFiles/rebuild_cache.dir
