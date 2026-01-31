@@ -4,34 +4,43 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   Alert,
+  StyleSheet,
 } from 'react-native';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { auth } from '../../services/firebase';
+import { supabase } from '../../services/supabase';
 import { useNavigation } from '@react-navigation/native';
-import { AuthStackParamList } from '../../navigation/types';
-type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
+const LoginScreen = () => {
+  const navigation = useNavigation<any>();
 
-const LoginScreen = ({navigation}: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Validation', 'Email and password are required');
+      Alert.alert('Validation', 'Email and password required');
       return;
     }
 
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(auth, email.trim(), password);
-      // RootNavigator will auto handle navigation
-    } catch (error: any) {
-      Alert.alert('Login failed', error.message);
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+
+      // 🎉 Login success
+      Alert.alert('Success', 'Logged in successfully');
+      console.log('Login data:', data);
+
+      // RootNavigator will redirect based on session state
+    
+    } catch (err: any) {
+      Alert.alert('Login failed', err.message);
     } finally {
       setLoading(false);
     }
@@ -43,69 +52,72 @@ const LoginScreen = ({navigation}: Props) => {
 
       <TextInput
         placeholder="Email"
-        style={styles.input}
-        keyboardType="email-address"
-        autoCapitalize="none"
         value={email}
         onChangeText={setEmail}
+        autoCapitalize="none"
+        style={styles.input}
       />
 
       <TextInput
         placeholder="Password"
-        style={styles.input}
-        secureTextEntry
         value={password}
         onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
       />
 
       <TouchableOpacity
-        style={styles.button}
+        style={styles.loginButton}
         onPress={handleLogin}
         disabled={loading}
       >
-        <Text style={styles.buttonText}>
+        <Text style={{ color: '#fff' }}>
           {loading ? 'Logging in...' : 'Login'}
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-  <Text style={{ textAlign: 'center', marginTop: 16 }}>
-    Don’t have an account? Register
-  </Text>
-</TouchableOpacity>
 
+      <TouchableOpacity
+        style={styles.registerButton}
+        onPress={() => navigation.navigate('Register')}
+      >
+        <Text style={{ color: '#007AFF' }}>
+          Don’t have an account? Register
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 export default LoginScreen;
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1,  
     justifyContent: 'center',
-    padding: 24,
+    padding: 16,
   },
   title: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 24,
     textAlign: 'center',
   },
   input: {
-    borderWidth: 1,
+    height: 48,
     borderColor: '#ccc',
+    borderWidth: 1,
     borderRadius: 8,
-    padding: 12,
+    paddingHorizontal: 12,  
     marginBottom: 16,
   },
-  button: {
+  loginButton: {  
     backgroundColor: '#007AFF',
-    padding: 14,
-    borderRadius: 8,
+    height: 48,
+    borderRadius: 8,  
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16, 
   },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
+  registerButton: {
+    alignItems: 'center',
   },
-});
+}); 

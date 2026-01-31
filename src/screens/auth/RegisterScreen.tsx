@@ -4,44 +4,60 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   Alert,
+  StyleSheet,
 } from 'react-native';
-import { createUserWithEmailAndPassword,signOut } from 'firebase/auth';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AuthStackParamList } from '../../navigation/types'; 
+import { supabase } from '../../services/supabase';
+import {useNavigation} from '@react-navigation/native';
 
-import { auth } from '../../services/firebase';
-type Props = NativeStackScreenProps<AuthStackParamList, 'Register'>;
 
-const RegisterScreen = ({ navigation }: Props) => {
+const RegisterScreen = () => {
+
+
+const { navigate } = useNavigation<any>();
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState<'customer' | 'provider' | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
-    if (!email || !password || !confirmPassword) {
+    if (!email || !password || !role) {
       Alert.alert('Validation', 'All fields are required');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      Alert.alert('Validation', 'Passwords do not match');
       return;
     }
 
     try {
       setLoading(true);
-      await createUserWithEmailAndPassword(auth, email.trim(), password);
 
-      await signOut(auth);
-      // RootNavigator will auto redirect after signup
-      // navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
-      navigation.replace('Login');
+      //  Create auth user
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-    } catch (error: any) {
-      Alert.alert('Registration failed', error.message);
+      if (error || !data.user) {
+        throw error;
+      }
+
+      // Save role in profiles table
+      const { error: roleError } = await supabase.from('profiles').upsert({
+        id: data.user.id,
+        role,
+      });
+
+      if (roleError) {
+        throw roleError;
+      }
+
+      Alert.alert('Success', 'Account created successfully');
+      // RootNavigator will auto-redirect
+      navigate('Login');
+
+    } catch (err: any) {
+      Alert.alert('Registration failed', err.message);
+      console.error('Registration error:', err);
     } finally {
       setLoading(false);
     }
@@ -53,36 +69,59 @@ const RegisterScreen = ({ navigation }: Props) => {
 
       <TextInput
         placeholder="Email"
-        style={styles.input}
-        autoCapitalize="none"
-        keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
+        autoCapitalize="none"
+        style={styles.input}
       />
 
       <TextInput
         placeholder="Password"
-        style={styles.input}
-        secureTextEntry
         value={password}
         onChangeText={setPassword}
+        secureTextEntry
+        style={styles.input}
       />
 
-      <TextInput
-        placeholder="Confirm Password"
-        style={styles.input}
-        secureTextEntry
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-      />
+      <Text style={styles.roleTitle}>Select Role</Text>
+
+      <View style={styles.roleContainer}>
+        <TouchableOpacity
+          style={[
+            styles.roleButton,
+            role === 'customer' && styles.roleSelected,
+          ]}
+          onPress={() => setRole('customer')}
+        >
+          <Text>Customer</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            styles.roleButton,
+            role === 'provider' && styles.roleSelected,
+          ]}
+          onPress={() => setRole('provider')}
+        >
+          <Text>Provider</Text>
+        </TouchableOpacity>
+      </View>
 
       <TouchableOpacity
-        style={styles.button}
+        style={styles.submitButton}
         onPress={handleRegister}
         disabled={loading}
       >
-        <Text style={styles.buttonText}>
-          {loading ? 'Creating account...' : 'Register'}
+        <Text style={{ color: '#fff' }}>
+          {loading ? 'Creating...' : 'Register'}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => navigate('Login')}
+      >
+        <Text style={{ color: '#007AFF' }}>
+          Already have an account? Login
         </Text>
       </TouchableOpacity>
     </View>
@@ -94,30 +133,48 @@ export default RegisterScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     padding: 24,
+    justifyContent: 'center',
   },
   title: {
     fontSize: 26,
     fontWeight: 'bold',
-    marginBottom: 24,
     textAlign: 'center',
+    marginBottom: 24,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 8,
     padding: 12,
     marginBottom: 16,
   },
-  button: {
-    backgroundColor: '#28a745',
-    padding: 14,
+  roleTitle: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  roleContainer: {
+    flexDirection: 'row',
+    marginBottom: 24,
+  },
+  roleButton: {
+    flex: 1,
+    padding: 12,
+    borderWidth: 1,
+    alignItems: 'center',
+    marginHorizontal: 4,
     borderRadius: 8,
   },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    textAlign: 'center',
+  roleSelected: {
+    backgroundColor: '#cce5ff',
   },
+  submitButton: {
+    backgroundColor: '#007AFF',
+    padding: 14,
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  loginButton: {
+    marginTop: 16,
+    alignItems: 'center',
+  },  
 });

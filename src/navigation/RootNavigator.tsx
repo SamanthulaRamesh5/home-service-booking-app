@@ -1,43 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import React from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
+import { useAuth } from '../context/AuthContext';
 import AuthNavigator from './AuthNavigator';
-import AppNavigator from './AppNavigator';
-import { auth, db } from '../services/firebase';
-type Props = {
-  role: 'customer' | 'provider' | null;
-};
+import CustomerHomeScreen from '../screens/customer/CustomerHomeScreen';
+import ProviderHomeScreen from '../screens/customer/ProviderHomeScreen';
 
-const RootNavigator = ({ role }: Props) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+const Stack = createNativeStackNavigator();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (usr) => {
-      if (usr) {
-        setUser(usr);
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
-    }
+const RootNavigator = () => {
+  const { session, loading, role } = useAuth();
+
+  // ⏳ Still loading auth or role
+  if (loading || (session && !role)) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
     );
+  }
 
-    return () => unsubscribe();
-  }, []);
+  // 🔐 NOT LOGGED IN
+  if (!session) {
+    return <AuthNavigator />;
+  }
 
-  if (loading) return null;
-
+  // ✅ LOGGED IN + ROLE READY
   return (
-    <NavigationContainer>
-      {!user ? (
-        <AuthNavigator />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {role === 'customer' ? (
+        <Stack.Screen
+          name="CustomerHome"
+          component={CustomerHomeScreen}
+        />
       ) : (
-        <AppNavigator role={role} />
+        <Stack.Screen
+          name="ProviderHome"
+          component={ProviderHomeScreen}
+        />
       )}
-    </NavigationContainer>
+    </Stack.Navigator>
   );
 };
 
