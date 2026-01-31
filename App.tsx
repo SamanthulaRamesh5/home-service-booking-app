@@ -10,9 +10,6 @@ const App = () => {
       <RootNavigator />
     </NavigationContainer>
     </AuthProvider>
-    // <NavigationContainer>
-    //   <RootNavigator />
-    // </NavigationContainer>
   )
 };
 

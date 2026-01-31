@@ -143,5 +143,4 @@ android/build/
 # Android build artifacts
 android/app/.cxx/
 android/app/build/
-
-.env
+android/build/
