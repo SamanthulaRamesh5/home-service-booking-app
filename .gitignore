@@ -139,5 +139,9 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 android/.gradle/
 ios/build/
-android/app/build/
 android/build/
+# Android build artifacts
+android/app/.cxx/
+android/app/build/
+
+.env
