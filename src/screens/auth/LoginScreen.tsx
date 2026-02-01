@@ -4,43 +4,40 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Alert,
   StyleSheet,
+  Alert,
 } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { AuthStackParamList } from '../../navigation/types';
 import { supabase } from '../../services/supabase';
-import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = () => {
-  const navigation = useNavigation<any>();
+type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
+const LoginScreen = ({ navigation }: Props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
-      Alert.alert('Validation', 'Email and password required');
+      Alert.alert('Validation', 'Email and password are required');
       return;
     }
 
     try {
       setLoading(true);
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
         password,
       });
 
       if (error) throw error;
 
-      // 🎉 Login success
-      Alert.alert('Success', 'Logged in successfully');
-      console.log('Login data:', data);
-
-      // RootNavigator will redirect based on session state
-    
-    } catch (err: any) {
-      Alert.alert('Login failed', err.message);
+      // ✅ DO NOTHING ELSE
+      // RootNavigator will auto-redirect based on role
+    } catch (error: any) {
+      Alert.alert('Login failed', error.message);
     } finally {
       setLoading(false);
     }
@@ -52,35 +49,33 @@ const LoginScreen = () => {
 
       <TextInput
         placeholder="Email"
+        style={styles.input}
+        keyboardType="email-address"
+        autoCapitalize="none"
         value={email}
         onChangeText={setEmail}
-        autoCapitalize="none"
-        style={styles.input}
       />
 
       <TextInput
         placeholder="Password"
+        style={styles.input}
+        secureTextEntry
         value={password}
         onChangeText={setPassword}
-        secureTextEntry
-        style={styles.input}
       />
 
       <TouchableOpacity
-        style={styles.loginButton}
+        style={styles.button}
         onPress={handleLogin}
         disabled={loading}
       >
-        <Text style={{ color: '#fff' }}>
+        <Text style={styles.buttonText}>
           {loading ? 'Logging in...' : 'Login'}
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.registerButton}
-        onPress={() => navigation.navigate('Register')}
-      >
-        <Text style={{ color: '#007AFF' }}>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={{ textAlign: 'center', marginTop: 16 }}>
           Don’t have an account? Register
         </Text>
       </TouchableOpacity>
@@ -89,35 +84,34 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,  
+    flex: 1,
     justifyContent: 'center',
-    padding: 16,
+    padding: 24,
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 24,
     textAlign: 'center',
   },
   input: {
-    height: 48,
-    borderColor: '#ccc',
     borderWidth: 1,
+    borderColor: '#ccc',
     borderRadius: 8,
-    paddingHorizontal: 12,  
+    padding: 12,
     marginBottom: 16,
   },
-  loginButton: {  
+  button: {
     backgroundColor: '#007AFF',
-    height: 48,
-    borderRadius: 8,  
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16, 
+    padding: 14,
+    borderRadius: 8,
   },
-  registerButton: {
-    alignItems: 'center',
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-}); 
+});
