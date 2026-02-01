@@ -4,8 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { useAuth } from '../context/AuthContext';
 import AuthNavigator from './AuthNavigator';
-import CustomerHomeScreen from '../screens/customer/CustomerHomeScreen';
-import ProviderHomeScreen from '../screens/customer/ProviderHomeScreen';
+import ProviderNavigator from './ProviderNavigator';
+import CustomerBookingNavigator from './CustomerBookingNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,13 +31,13 @@ const RootNavigator = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {role === 'customer' ? (
         <Stack.Screen
-          name="CustomerHome"
-          component={CustomerHomeScreen}
+          name="CustomerStack"
+          component={CustomerBookingNavigator}
         />
       ) : (
         <Stack.Screen
           name="ProviderHome"
-          component={ProviderHomeScreen}
+          component={ProviderNavigator}
         />
       )}
     </Stack.Navigator>

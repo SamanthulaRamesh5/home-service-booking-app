@@ -1,88 +1,74 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  Alert,
-} from 'react-native';
-
-import { SERVICES } from '../../constants/services';
-import ServiceCard from '../../components/SeviceCard';
-import { useAuth } from '../../context/AuthContext';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const CustomerHomeScreen = () => {
-  // const { profile, signOut } = useAuth();
+  const navigation = useNavigation<any>();
 
   return (
-    // <View style={styles.container}>
-    //   {/* Header */}
-    //   <View style={styles.header}>
-    //     <Text style={styles.welcome}>
-    //       Welcome 👋
-    //     </Text>
-    //     <Text style={styles.email}>
-    //       {profile?.email ?? 'Customer'}
-    //     </Text>
-    //   </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Welcome 👋</Text>
+      <Text style={styles.subtitle}>
+        What would you like to do today?
+      </Text>
 
-    //   {/* Services */}
-    //   <Text style={styles.sectionTitle}>Services</Text>
+      <TouchableOpacity
+        style={styles.primaryButton}
+        onPress={() => navigation.navigate('Services')}
+      >
+        <Text style={styles.buttonText}>Book a Service</Text>
+      </TouchableOpacity>
 
-    //   <FlatList
-    //     data={SERVICES}
-    //     numColumns={2}
-    //     keyExtractor={(item) => item.id}
-    //     columnWrapperStyle={{ justifyContent: 'space-between' }}
-    //     renderItem={({ item }) => (
-    //       <ServiceCard
-    //         title={item.title}
-    //         icon={item.icon}
-    //         onPress={() =>
-    //           Alert.alert('Selected', item.title)
-    //         }
-    //       />
-    //     )}
-    //   />
-
-    //   {/* Logout (temporary) */}
-    //   <Text style={styles.logout} onPress={signOut}>
-    //     Logout
-    //   </Text>
-    // </View>
-    <View>
-      <Text>CustomerHomeScreen</Text>
+      <TouchableOpacity
+        style={styles.secondaryButton}
+        onPress={() => navigation.navigate('BookingStatus')}
+      >
+        <Text style={styles.secondaryText}>My Bookings</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 export default CustomerHomeScreen;
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#f5f5f5',
+    flex: 1,  
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,  
+    backgroundColor: '#f9f9f9',
   },
-  header: {
-    marginBottom: 24,
-  },
-  welcome: {
-    fontSize: 22,
+  title: {  
+    fontSize: 28,
     fontWeight: 'bold',
-  },
-  email: {
-    color: '#555',
-    marginTop: 4,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
     marginBottom: 12,
   },
-  logout: {
+  subtitle: {
+    fontSize: 16, 
+    color: '#666',
+    marginBottom: 32,
     textAlign: 'center',
-    color: '#ff3b30',
-    marginTop: 12,
   },
-});
+  primaryButton: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 14,
+    paddingHorizontal: 48,
+    borderRadius: 8,  
+    marginBottom: 16,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  secondaryButton: {
+    paddingVertical: 14,  
+    paddingHorizontal: 48,
+    borderRadius: 8,
+  },
+  secondaryText: {
+    color: '#007AFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+}); 
